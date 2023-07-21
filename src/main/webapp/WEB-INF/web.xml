@@ -8,4 +8,57 @@
             30
         </session-timeout>
     </session-config>
+    
+    <filter>
+       <filter-name>UrlRewriteFilter</filter-name>
+       <filter-class>org.tuckey.web.filters.urlrewrite.UrlRewriteFilter</filter-class>
+        <!-- indica la cantidad de segundos que será usada para chequear si el fichero de configuración ha sufrido cambios 
+        y se requiere su recarga-->
+        <init-param>
+            <param-name>confReloadCheckInterval</param-name>
+            <param-value>1</param-value>
+        </init-param>
+ 
+        <!-- path del fichero de configuración (por defecto /WEB-INF/urlrewrite.xml) -->
+        <init-param>
+            <param-name>confPath</param-name>
+            <param-value>/WEB-INF/urlrewrite.xml</param-value>
+        </init-param>
+ 
+        <!-- nivel de log (por defecto WARN) -->
+        <!--<init-param>
+            <param-name>logLevel</param-name>
+            <param-value>DEBUG</param-value>
+        </init-param>-->
+ 
+        <!-- path del monitor de estado del filtro, debe comenzar con / -->
+        <init-param>
+            <param-name>statusPath</param-name>
+            <param-value>/rewriteStatus</param-value>
+        </init-param>
+ 
+        <!-- indica si el monitor de estado está activo (por defecto true) -->
+        <init-param>
+            <param-name>statusEnabled</param-name>
+            <param-value>true</param-value>
+        </init-param>
+ 
+        <!-- hosts que tendrán acceso al monitor de estado, se puede usar el * como
+        comodin (por defecto "localhost, local, 127.0.0.1") -->
+        <init-param>
+            <param-name>statusEnabledOnHosts</param-name>
+            <param-value>localhost</param-value>
+        </init-param>
+ 
+        <!-- por defecto false. Indica que se usará el estilo de configuración del módulo mod_rewrite. 
+        Si está activado buscará un fichero de configuración /WEB-INF/.htaccess (se puede modificar con el parámetro confPath) -->
+        <init-param>
+            <param-name>modRewriteConf</param-name>
+            <param-value>false</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+       <filter-name>UrlRewriteFilter</filter-name>
+       <url-pattern>/*</url-pattern>
+    </filter-mapping>
 </web-app>

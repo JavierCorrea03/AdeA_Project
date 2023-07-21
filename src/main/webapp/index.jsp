@@ -102,6 +102,21 @@
             </div>
         </div>
         
+        <!<!-- MODAL CARGANDO -->
+        <div id="modal_cargando" class="modal fade" tabindex="-5" style="opacity: 0.4; background-color: black;" data-backdrop="static" data-keyboard="false">
+            <div class="modal-dialog" style="margin-top: 25%;">
+                <div style="display: flex; justify-content: center; align-items: center;">
+                    <center>
+                        <span class="spinner-border text-white"></span>
+                        <strong>
+                            <div style='#FFFFFF'>Cargando...</div>
+                        </strong>
+                    </center>
+                </div>
+            </div>
+        </div>
+        
+        <!<!-- SCRIPTS -->
         <script src="vistas/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script type="text/javascript" src="vistas/plugins/toastr/toastr.min.js"></script>
@@ -111,9 +126,35 @@
         
         <script>
             $("#validar_usuario").submit(function (e) {
-                e.preventDefault();
-                console.log("Usando jQuery");
+                e.preventDefault(); 
+                
+                var form_datos = new FormData(document.getElementById("validar_usuario"));
+                abrir_modal("modal_cargando");
+                $.ajax({
+                    url: "usuario/validarUsuario",
+                    type: "POST",
+                    dataType: "JSON",
+                    data: form_datos,
+                    cache: false,
+                    contentType: false,
+                    processData: false
+                }).done(function (res) {
+console.log("res"+JSON.stringify(res));
+                    cerrar_modal("modal_cargando");
+                });
             });
+            
+        </script>
+        
+        <!<!-- MODAL  -->
+        <script>
+            function abrir_modal(div) {
+                $('#' + div).css("display", "block");
+            }
+
+            function cerrar_modal(div) {
+                $('#' + div).css("display", "none");
+            }
         </script>
         
     </body>

@@ -1,0 +1,12 @@
+<!DOCTYPE urlrewrite
+  	PUBLIC "-//tuckey.org//DTD UrlRewrite 3.0//EN"
+      "http://tuckey.org/res/dtds/urlrewrite3.0.dtd">
+          
+  <urlrewrite> 
+    <!-- Usuarios --> 
+    <rule>
+        <from>^/usuario/([a-z]+)$</from> 
+        <to>/usuarioControl?accion=$1</to>
+    </rule>
+  </urlrewrite>
+
