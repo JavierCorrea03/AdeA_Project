@@ -139,14 +139,28 @@
                     contentType: false,
                     processData: false
                 }).done(function (res) {
-console.log("res"+JSON.stringify(res));
                     cerrar_modal("modal_cargando");
+                    if(res.data[0].usuario == "correcto"){
+                        window.location.href = "usuarios.jsp";  
+                    }else if(res.data[0].usuario == "vencido"){
+                        Swal.fire({
+                            icon: 'error',
+                            title: '¡Error!',
+                            text: 'Su cuenta se encuentra vencida. Favor de contactar a Soporte'
+                        });
+                    }else if(res.data[0].usuario == "incorrecto"){
+                        Swal.fire({
+                            icon: 'error',
+                            title: '¡Error!',
+                            text: 'Usuario y/o contraseña incorrecto'
+                        });
+                    }
                 });
             });
             
         </script>
         
-        <!<!-- MODAL  -->
+        <!<!-- MODAL -->
         <script>
             function abrir_modal(div) {
                 $('#' + div).css("display", "block");
