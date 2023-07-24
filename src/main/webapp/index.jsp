@@ -79,21 +79,18 @@
                     <!-- FORMULARIO LOGIN -->
                     <form id="validar_usuario">
                         <!-- USUARIO -->
-                        <label for="email" class="form-label">Correo electrónico</label>
+                        <label for="usuario" class="form-label">Nombre de usuario</label>
                         <div class="input-group mb-4">
                             <span class="input-group-text btn-primary" id="user_icon"><i class="fas fa-user"></i></span>
-                            <input type="email" class="form-control" name="correo" aria-label="email" aria-describedby="user_icon" required>
+                            <input type="text" class="form-control" name="usuario" aria-label="usuario" aria-describedby="user_icon" placeholder="Nombre de usuario. Ej: jlopez" required>
                         </div>
                         <!-- CONTRASENIA -->
                         <label for="password" class="form-label">Contraseña</label>
                         <div class="input-group mb-4">
                             <span class="input-group-text btn-primary" id="password_icon"><i class="fas fa-lock"></i></span>
-                            <input type="password" class="form-control " name="password" aria-label="password" aria-describedby="password_icon" required>
+                            <input type="password" class="form-control " name="password" aria-label="password" aria-describedby="password_icon" placeholder="Contraseña" required>
                         </div>
                         <!-- SUBMIT -->
-<!--                        <div class="mb-4 div1">
-                            <span><a href="vistas/forgotPassword.jsp">Forgot your password?</a></span>
-                        </div>-->
                         <div class="d-grid">
                             <button type="submit" class="btn btn-primary">Log-in</button>
                         </div>
@@ -121,7 +118,6 @@
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script type="text/javascript" src="vistas/plugins/toastr/toastr.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.3.6/sweetalert2.min.js"></script>
         
         <script>
@@ -142,17 +138,11 @@
                     cerrar_modal("modal_cargando");
                     if(res.data[0].usuario == "correcto"){
                         window.location.href = "usuarios.jsp";  
-                    }else if(res.data[0].usuario == "vencido"){
-                        Swal.fire({
-                            icon: 'error',
-                            title: '¡Error!',
-                            text: 'Su cuenta se encuentra vencida. Favor de contactar a Soporte'
-                        });
                     }else if(res.data[0].usuario == "incorrecto"){
                         Swal.fire({
                             icon: 'error',
                             title: '¡Error!',
-                            text: 'Usuario y/o contraseña incorrecto'
+                            text: 'Su usuario y/o contraseña son incorrectos. \nTambién es posible que su cuenta se encuentre vencida.'
                         });
                     }
                 });

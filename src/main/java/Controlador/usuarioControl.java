@@ -44,6 +44,21 @@ public class usuarioControl extends HttpServlet {
                 case "eliminarUsuario":
                     out.print(eliminar_usuario(request).toJSONString());
                     break;
+                case "addUsuario":
+                    out.print(add_usuario(request).toJSONString());
+                    break;
+                case "listarUno":
+                    out.print(listar_uno(request).toJSONString());
+                    break;
+                case "editUsuario":
+                    out.print(edit_usuario(request).toJSONString());
+                    break;
+                case "reactivarUsuario":
+                    out.print(reactivar_usuario(request).toJSONString());
+                    break;
+                case "comprobarVigencia":
+                    out.print(comprobar_vigencia(request).toJSONString());
+                    break;
                 default:
                     break;
             }
@@ -108,6 +123,82 @@ public class usuarioControl extends HttpServlet {
         usuario u = new usuario();
         try {
             json.put("data", u.eliminar_usuario(parametros));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return json;
+    }
+
+    protected JSONObject add_usuario(HttpServletRequest request) throws FileUploadException, UnsupportedEncodingException{
+
+        recibir_variables rv = new recibir_variables();
+        HashMap<String, String> parametros = new HashMap();
+        parametros = rv.recibir(request).get("parametros");
+
+        JSONObject json = new JSONObject();
+        usuario u = new usuario();
+        try {
+            json.put("data", u.add_usuario(parametros));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return json;
+    }
+
+    protected JSONObject listar_uno(HttpServletRequest request) throws FileUploadException, UnsupportedEncodingException{
+
+        recibir_variables rv = new recibir_variables();
+        HashMap<String, String> parametros = new HashMap();
+        parametros = rv.recibir(request).get("parametros");
+
+        JSONObject json = new JSONObject();
+        usuario u = new usuario();
+        try {
+            json.put("data", u.listar_uno(parametros));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return json;
+    }
+
+    protected JSONObject edit_usuario(HttpServletRequest request) throws FileUploadException, UnsupportedEncodingException{
+
+        recibir_variables rv = new recibir_variables();
+        HashMap<String, String> parametros = new HashMap();
+        parametros = rv.recibir(request).get("parametros");
+
+        JSONObject json = new JSONObject();
+        usuario u = new usuario();
+        try {
+            json.put("data", u.edit_usuario(parametros));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return json;
+    }
+
+    protected JSONObject reactivar_usuario(HttpServletRequest request) throws FileUploadException, UnsupportedEncodingException{
+
+        recibir_variables rv = new recibir_variables();
+        HashMap<String, String> parametros = new HashMap();
+        parametros = rv.recibir(request).get("parametros");
+
+        JSONObject json = new JSONObject();
+        usuario u = new usuario();
+        try {
+            json.put("data", u.reactivar_usuario(parametros));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return json;
+    }
+
+    protected JSONObject comprobar_vigencia(HttpServletRequest request) throws FileUploadException, UnsupportedEncodingException{
+
+        JSONObject json = new JSONObject();
+        usuario u = new usuario();
+        try {
+            json.put("data", u.comprobar_vigencia());
         } catch (Exception e) {
             e.printStackTrace();
         }

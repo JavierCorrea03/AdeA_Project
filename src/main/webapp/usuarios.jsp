@@ -9,12 +9,9 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Usuaarios AdeA</title>
+        <title>Usuarios AdeA</title>
         <!---------- CSS ---------->
         <link rel="icon" type="image/png" sizes="16x16 32x32" href="vistas/img/favicon.ico">
-        <!-- Google Font: Source Sans Pro -->
-<!--        <link rel="stylesheet"
-            href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">-->
         <!-- Font Awesome Icons -->
         <link rel="stylesheet" href="vistas/plugins/fontawesome/css/all.min.css">
         <!-- Theme style -->
@@ -41,7 +38,7 @@
     <body>
         <div class="wrapper">
             <section class="content" style="padding: 10px .5rem;">
-                <!-- Contenido principal -->
+                <!-- CONTENIDO PRINCIPAL -->
                 <div class="container">
                     <div class="row">
                         <div class="col-12">
@@ -61,8 +58,8 @@
                                         </div>
                                     </div>
                                 </div>
+                                <!-- BOTONES DE FILTRO Y ADICION DE USUARIO -->
                                 <div class="card-body">
-                                    <!-- BOTONES DE FILTRO Y ADICION DE USUARIO -->
                                     <div class="row col-12">
                                         <!<!-- TODOS -->
                                         <div class="col-md-2 col-sm-12 text-center" style="padding: 10px .5rem;">
@@ -88,11 +85,8 @@
                                                 Revocados
                                             </button>
                                         </div>
-                                        <!<!-- REVOCADOS -->
-                                        <div class="col-md-2 col-sm-12 text-left" style="padding: 10px .5rem;">
-                                        </div>
                                         <!<!-- ADD USUARIO -->
-                                        <div class="col-md-2 col-sm-12 text-right" style="padding: 10px .5rem;">
+                                        <div class="col-md-4 col-sm-12 text-right" style="padding: 10px .5rem;">
                                             <button type="button" class="btn btn-info" value="ADD" data-toggle='tooltip' title="A{adir usuario" id="add_usuario">
                                                 <i class="fas fa-plus"></i> Añadir Usuario
                                             </button>
@@ -122,7 +116,161 @@
             </section>
         </div>
         
-        <!<!-- MODAL CARGANDO -->
+        <!-- MODAL AGREGAR USUARIO -->    
+        <div class="modal fade" id="modal_usuario" role="dialog" data-backdrop="static" data-keyboard="false" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-xl">
+                <div class="modal-content">
+                    <!-- ENCABEZADO -->
+                    <div class="modal-header" style="background-color:#465385">
+                        <h5 class="modal-title" id="titulo_modal" style="color: white;">Añadir usuario</h5>
+                        <button type="button" class="close" onclick="$('#modal_usuario').modal('hide')" aria-label="Close" style="color: white;">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form id="formNuevoUsuario">
+                        <div class="card-body">
+                            <!-- DIV DATOS GENERALES DEL USUARIO -->
+                            <div class="row mb-2 match-height">
+                                <!-- NOMBRE -->
+                                <div class="col-sm-12 col-md-12 col-lg-3">
+                                    <label>Nombre</label>
+                                    <input type="text" onkeyup="return (this.value = this.value.replace(/[^a-zA-Z0-9]/,''))" autocomplete="off" class="form-control nom_usuario" id="nombre_usuario" name="nombre_usuario" required>
+                                </div>
+                                <!-- PRIMER APELLIDO -->
+                                <div class="col-sm-12 col-md-12 col-lg-3">
+                                    <label>Primer Apellido</label>
+                                    <input type="text" onkeyup="return (this.value = this.value.replace(/[^a-zA-Z0-9]/,''))" autocomplete="off" class="form-control nom_usuario" id="primer_apellido" name="primer_apellido" required>
+                                </div>
+                                <!-- SEGUNDO APELLIDO -->
+                                <div class="col-sm-12 col-md-12 col-lg-3">
+                                    <label>Segundo Apellido</label>
+                                    <input type="text" onkeyup="return (this.value = this.value.replace(/[^a-zA-Z0-9]/,''))" autocomplete="off" class="form-control" id="segundo_apellido" name="segundo_apellido">
+                                    </select>
+                                </div>
+                                <!-- LOGIN DE USUARIO -->
+                                <div class="col-sm-12 col-md-12 col-lg-3">
+                                    <label>Nombre de usuario</label>
+                                    <input type="text" autocomplete="off" class="form-control" id="nombre_login" name="nombre_login" readonly>
+                                </div>
+                            </div>
+                            <div class="row mb-2 match-height">
+                                <!-- EMAIL -->
+                                <div class="col-sm-12 col-md-12 col-lg-3">
+                                    <label>Email</label>
+                                    <input type="email" autocomplete="off" class="form-control" id="correo" name="correo">
+                                </div>
+                                <!-- CONTRASENIA -->
+                                <div class="col-sm-12 col-md-12 col-lg-3">
+                                    <label>Constraseña</label>
+                                    <input type="password" autocomplete="off" class="form-control" id="password" name="password" required>
+                                </div>
+                                <!-- FECHA VIGENCIA -->
+                                <div class="col-sm-12 col-md-12 col-lg-3">
+                                    <label>Fecha vigencia</label>
+                                    <input type="date" class="form-control" id="fecha_vigencia">
+                                </div>
+                            </div>
+                            <div class="row mb-2 match-height">
+                                <!-- CLIENTE -->
+                                <div class="col-sm-12 col-md-12 col-lg-3">
+                                    <label>Cliente</label>
+                                    <input type="number" autocomplete="off" class="form-control" id="cliente" name="cliente" required>
+                                </div>
+                                <!-- AREA -->
+                                <div class="col-sm-12 col-md-12 col-lg-3">
+                                    <label>Área</label>
+                                    <input type="number" autocomplete="off" class="form-control" id="area" name="area">
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" id="boton_guardar" class="btn btn-success mt-1 waves-effect waves-light">Guardar</button>
+                                <button type="button" class="btn btn-danger" onclick="$('#modal_usuario').modal('hide')">Cerrar</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <!-- MODAL EDITAR USUARIO -->    
+        <div class="modal fade" id="modal_editar_usuario" role="dialog" data-backdrop="static" data-keyboard="false" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-xl">
+                <div class="modal-content">
+                    <!-- ENCABEZADO -->
+                    <div class="modal-header" style="background-color:#465385">
+                        <h5 class="modal-title" id="titulo_modal_edit_user" style="color: white;">Editar usuario</h5>
+                        <button type="button" class="close" onclick="$('#modal_editar_usuario').modal('hide')" aria-label="Close" style="color: white;">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form id="formEditUsuario">
+                        <div class="card-body">
+                            <!-- DIV DATOS GENERALES DEL USUARIO -->
+                            <div class="row mb-2 match-height">
+                                <!-- CAMPO ID_USUARIO OCULTO -->
+                                <input type="text" autocomplete="off" class="form-control" id="edit_id_usuario" name="edit_id_usuario" hidden>
+                                <!-- NOMBRE -->
+                                <div class="col-sm-12 col-md-12 col-lg-3">
+                                    <label>Nombre</label>
+                                    <input type="text" onkeyup="return (this.value = this.value.replace(/[^a-zA-Z0-9]/,''))" autocomplete="off" class="form-control nom_usuario" id="edit_nombre_usuario" name="edit_nombre_usuario" required>
+                                </div>
+                                <!-- PRIMER APELLIDO -->
+                                <div class="col-sm-12 col-md-12 col-lg-3">
+                                    <label>Primer Apellido</label>
+                                    <input type="text" onkeyup="return (this.value = this.value.replace(/[^a-zA-Z0-9]/,''))" autocomplete="off" class="form-control nom_usuario" id="edit_primer_apellido" name="edit_primer_apellido" required>
+                                </div>
+                                <!-- SEGUNDO APELLIDO -->
+                                <div class="col-sm-12 col-md-12 col-lg-3">
+                                    <label>Segundo Apellido</label>
+                                    <input type="text" onkeyup="return (this.value = this.value.replace(/[^a-zA-Z0-9]/,''))" autocomplete="off" class="form-control" id="edit_segundo_apellido" name="edit_segundo_apellido">
+                                    </select>
+                                </div>
+                                <!-- LOGIN DE USUARIO -->
+                                <div class="col-sm-12 col-md-12 col-lg-3">
+                                    <label>Nombre de usuario</label>
+                                    <input type="text" autocomplete="off" class="form-control" id="edit_nombre_login" name="edit_nombre_login" readonly>
+                                </div>
+                            </div>
+                            <div class="row mb-2 match-height">
+                                <!-- EMAIL -->
+                                <div class="col-sm-12 col-md-12 col-lg-3">
+                                    <label>Email</label>
+                                    <input type="email" autocomplete="off" class="form-control" id="edit_correo" name="edit_correo">
+                                </div>
+                                <!-- CONTRASENIA -->
+                                <div class="col-sm-12 col-md-12 col-lg-3">
+                                    <label>Constraseña</label>
+                                    <input type="password" autocomplete="off" class="form-control" id="edit_password" name="edit_password" required>
+                                </div>
+                                <!-- FECHA VIGENCIA -->
+                                <div class="col-sm-12 col-md-12 col-lg-3">
+                                    <label>Fecha vigencia</label>
+                                    <input type="date" class="form-control" id="edit_fecha_vigencia">
+                                </div>
+                            </div>
+                            <div class="row mb-2 match-height">
+                                <!-- CLIENTE -->
+                                <div class="col-sm-12 col-md-12 col-lg-3">
+                                    <label>Cliente</label>
+                                    <input type="number" autocomplete="off" class="form-control" id="edit_cliente" name="edit_cliente" required>
+                                </div>
+                                <!-- AREA -->
+                                <div class="col-sm-12 col-md-12 col-lg-3">
+                                    <label>Área</label>
+                                    <input type="number" autocomplete="off" class="form-control" id="edit_area" name="edit_area">
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" id="boton_guardar_edicion" class="btn btn-success mt-1 waves-effect waves-light">Guardar</button>
+                                <button type="button" class="btn btn-danger" onclick="$('#modal_editar_usuario').modal('hide')">Cerrar</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <!-- MODAL CARGANDO -->
         <div id="modal_cargando" class="modal fade" tabindex="-5" style="opacity: 0.4; background-color: black;" data-backdrop="static" data-keyboard="false">
             <div class="modal-dialog" style="margin-top: 25%;">
                 <div style="display: flex; justify-content: center; align-items: center;">
@@ -155,8 +303,20 @@
         <script>
             // AL CARGAR LA PAGINA
             $(document).ready(function(){
-                cargar_tabla();
+                comprobar_vigencia();
             });
+            
+            // COMPRUEBA SI HAY USUARIOS CON VIGENCIA VENCIDA Y LOS CAMBIA DE STATUS
+            function comprobar_vigencia(){
+                $.ajax({
+                    url: "usuario/comprobarVigencia",
+                    cache: false,
+                    contentType: false,
+                    processData: false
+                }).done(function (res) {
+                    cargar_tabla();
+                });
+            }
             
             //-- CARGAR TABLA USUARIOS - TODOS LOS USUARIOS  
             var tabla_principal = "";
@@ -212,20 +372,33 @@
                         {
                             "defaultContent": "",
                             "render": function (data, type, row) {
-                                // botones editar y eliminar
-                                if(row.status == "R"){ // deshabilitar boton de eliminar si es estatus R
-                                    var boton = "<td>"
-                                            + "<button type='button' title='Editar' data-toggle='tooltip' class='btn btn-info block editar-usuario' id-usuario='" + row.id_usuario + "'>"
+                                // BOTONES EDITAR, REACTIVAR Y ELIMINAR
+                                var boton = "";
+                                if(row.status == "R"){ // USUARIO REVOCADO
+                                    boton = "<td>"
+                                            + "<button type='button' title='Editar' data-toggle='tooltip' class='btn btn-info block editar-usuario' onclick='editar_usuario(" + row.id_usuario + " )' id-usuario='" + row.id_usuario + "'>"
                                             + "<i class='fas fa-edit' aria-hidden='true'></i>"
                                             + "</button> "
-                                            + "<button type='button' title='Baja' data-toggle='tooltip' class='btn btn-danger block eliminar-usuario' onclick='eliminar_usuario(" + row.id_usuario + " )' id-usuario='" + row.id_usuario + "' disabled>"
+                                            + "<button type='button' title='Reactivar usuario' data-toggle='tooltip' class='btn btn-success block reactivar-usuario' onclick='reactivar_usuario(" + row.id_usuario + " )' id-usuario='" + row.id_usuario + "'>"
+                                            + "<i class='fas fa-trash-restore' aria-hidden='true'></i>"
+                                            + "</button>"
+                                        + "</td>";
+                                }else if (row.status == "A"){ // USUARIO ACTIVO
+                                    boton = "<td>"
+                                            + "<button type='button' title='Editar' data-toggle='tooltip' class='btn btn-info block editar-usuario' onclick='editar_usuario(" + row.id_usuario + " )' id-usuario='" + row.id_usuario + "'>"
+                                            + "<i class='fas fa-edit' aria-hidden='true'></i>"
+                                            + "</button> "
+                                            + "<button type='button' title='Baja' data-toggle='tooltip' class='btn btn-danger block eliminar-usuario' onclick='eliminar_usuario(" + row.id_usuario + " )' id-usuario='" + row.id_usuario + "'>"
                                             + "<i class='fas fa-trash-alt' aria-hidden='true'></i>"
                                             + "</button>"
                                         + "</td>";
-                                }else if (row.status == "A" || row.status == "B"){ // boton eliminar activo
-                                    var boton = "<td>"
-                                            + "<button type='button' title='Editar' data-toggle='tooltip' class='btn btn-info block editar-usuario' id-usuario='" + row.id_usuario + "'>"
+                                }else if(row.status == "B"){ // USUARIO INACTIVO
+                                    boton = "<td>"
+                                            + "<button type='button' title='Editar' data-toggle='tooltip' class='btn btn-info block editar-usuario' onclick='editar_usuario(" + row.id_usuario + " )' id-usuario='" + row.id_usuario + "'>"
                                             + "<i class='fas fa-edit' aria-hidden='true'></i>"
+                                            + "</button> "
+                                            + "<button type='button' title='Reactivar usuario' data-toggle='tooltip' class='btn btn-success block reactivar-usuario' onclick='reactivar_usuario(" + row.id_usuario + " )' id-usuario='" + row.id_usuario + "'>"
+                                            + "<i class='fas fa-trash-restore' aria-hidden='true'></i>"
                                             + "</button> "
                                             + "<button type='button' title='Baja' data-toggle='tooltip' class='btn btn-danger block eliminar-usuario' onclick='eliminar_usuario(" + row.id_usuario + " )' id-usuario='" + row.id_usuario + "'>"
                                             + "<i class='fas fa-trash-alt' aria-hidden='true'></i>"
@@ -299,20 +472,33 @@
                         {
                             "defaultContent": "",
                             "render": function (data, type, row) {
-                                // botones editar y eliminar
-                                if(row.status == "R"){ // deshabilitar boton de eliminar si es estatus R
-                                    var boton = "<td>"
-                                            + "<button type='button' title='Editar' data-toggle='tooltip' class='btn btn-info block editar-usuario' id-usuario='" + row.id_usuario + "'>"
+                                // BOTONES EDITAR, REACTIVAR Y ELIMINAR
+                                var boton = "";
+                                if(row.status == "R"){ // USUARIO REVOCADO
+                                    boton = "<td>"
+                                            + "<button type='button' title='Editar' data-toggle='tooltip' class='btn btn-info block editar-usuario' onclick='editar_usuario(" + row.id_usuario + " )' id-usuario='" + row.id_usuario + "'>"
                                             + "<i class='fas fa-edit' aria-hidden='true'></i>"
                                             + "</button> "
-                                            + "<button type='button' title='Baja' data-toggle='tooltip' class='btn btn-danger block eliminar-usuario' onclick='eliminar_usuario(" + row.id_usuario + " )' id-usuario='" + row.id_usuario + "' disabled>"
+                                            + "<button type='button' title='Reactivar usuario' data-toggle='tooltip' class='btn btn-success block reactivar-usuario' onclick='reactivar_usuario(" + row.id_usuario + " )' id-usuario='" + row.id_usuario + "'>"
+                                            + "<i class='fas fa-trash-restore' aria-hidden='true'></i>"
+                                            + "</button>"
+                                        + "</td>";
+                                }else if (row.status == "A"){ // USUARIO ACTIVO
+                                    boton = "<td>"
+                                            + "<button type='button' title='Editar' data-toggle='tooltip' class='btn btn-info block editar-usuario' onclick='editar_usuario(" + row.id_usuario + " )' id-usuario='" + row.id_usuario + "'>"
+                                            + "<i class='fas fa-edit' aria-hidden='true'></i>"
+                                            + "</button> "
+                                            + "<button type='button' title='Baja' data-toggle='tooltip' class='btn btn-danger block eliminar-usuario' onclick='eliminar_usuario(" + row.id_usuario + " )' id-usuario='" + row.id_usuario + "'>"
                                             + "<i class='fas fa-trash-alt' aria-hidden='true'></i>"
                                             + "</button>"
                                         + "</td>";
-                                }else if (row.status == "A" || row.status == "B"){ // boton eliminar activo
-                                    var boton = "<td>"
-                                            + "<button type='button' title='Editar' data-toggle='tooltip' class='btn btn-info block editar-usuario' id-usuario='" + row.id_usuario + "'>"
+                                }else if(row.status == "B"){ // USUARIO INACTIVO
+                                    boton = "<td>"
+                                            + "<button type='button' title='Editar' data-toggle='tooltip' class='btn btn-info block editar-usuario' onclick='editar_usuario(" + row.id_usuario + " )' id-usuario='" + row.id_usuario + "'>"
                                             + "<i class='fas fa-edit' aria-hidden='true'></i>"
+                                            + "</button> "
+                                            + "<button type='button' title='Reactivar usuario' data-toggle='tooltip' class='btn btn-success block reactivar-usuario' onclick='reactivar_usuario(" + row.id_usuario + " )' id-usuario='" + row.id_usuario + "'>"
+                                            + "<i class='fas fa-trash-restore' aria-hidden='true'></i>"
                                             + "</button> "
                                             + "<button type='button' title='Baja' data-toggle='tooltip' class='btn btn-danger block eliminar-usuario' onclick='eliminar_usuario(" + row.id_usuario + " )' id-usuario='" + row.id_usuario + "'>"
                                             + "<i class='fas fa-trash-alt' aria-hidden='true'></i>"
@@ -334,9 +520,132 @@
                 cargar_tabla();
             });
             
-            // ANIADIR USUARIO
+            // ANIADIR USUARIO (ABRIR MODAL)
             $("#add_usuario").on('click', function(){
-                console.log("aniadir usu");
+                $('#formNuevoUsuario')[0].reset();
+                $("#modal_usuario").modal('show');
+            });
+            
+            // ANIADIR USUARIO (SUBMIT MODAL)
+            $("#formNuevoUsuario").submit(function(e){
+                e.preventDefault(); 
+                
+                var form_datos = new FormData(document.getElementById("formNuevoUsuario"));
+                var fecha = new Date($("#fecha_vigencia").val());
+                var dia = fecha.getDate();
+                var mes = fecha.getMonth()+1;
+                var anio = fecha.getFullYear();
+                form_datos.append("fecha_vigencia", anio+"-"+mes+"-"+dia);
+                
+                abrir_modal("modal_cargando");
+                $.ajax({
+                    url: "usuario/addUsuario",
+                    type: "POST",
+                    dataType: "JSON",
+                    data: form_datos,
+                    cache: false,
+                    contentType: false,
+                    processData: false
+                }).done(function (res) {
+                    
+                    if(res.data == true){
+                        cerrar_modal("modal_cargando");
+                        $("#modal_usuario").modal('hide');
+                        Swal.fire({
+                            icon: 'success',
+                            title: '¡Éxito!',
+                            text: 'El usuario ha sido creado satisfactoriamente.'
+                        });
+                        cargar_tabla();
+                    }
+                });
+            });
+            
+            // OBTENER NOMBRE DE USUARIO CON LOS INPUTS NOMBRE Y APELLIDO (AL ANIADIR Y EDITAR USUARIO)
+            $(".nom_usuario").on('keyup', function(){
+                
+                //-------- PARA NUEVO USUARIO ---------
+                var nombre_usuario = $("#nombre_usuario").val().toLowerCase();
+                var inicial_nombre = nombre_usuario.substr(0, 1);
+                var primer_apellido = $("#primer_apellido").val().toLowerCase();
+                $("#nombre_login").val(inicial_nombre+primer_apellido);
+                
+                //-------- PARA EDITAR USUARIO ---------
+                var edit_nombre_usuario = $("#edit_nombre_usuario").val().toLowerCase();
+                var edit_inicial_nombre = edit_nombre_usuario.substr(0, 1);
+                var edit_primer_apellido = $("#edit_primer_apellido").val().toLowerCase();
+                $("#edit_nombre_login").val(edit_inicial_nombre+edit_primer_apellido);
+            });
+            
+            // EDITAR USUARIO (ABRIR MODAL PARA CARGAR SUS DATOS)
+            function editar_usuario(id){
+                
+                abrir_modal("modal_cargando");
+                $('#formEditUsuario')[0].reset();
+                
+                var form_datos = new FormData();
+                form_datos.append("id_usuario", id);
+                
+                $.ajax({
+                    url: "usuario/listarUno",
+                    type: "POST",
+                    dataType: "JSON",
+                    data: form_datos,
+                    cache: false,
+                    contentType: false,
+                    processData: false
+                }).done(function (res) {
+                    cerrar_modal("modal_cargando");
+                    
+                    // Setear datos de la consulta en los input
+                    $("#edit_id_usuario").val(res.data[0].id_usuario);
+                    $("#edit_nombre_usuario").val(res.data[0].nombre);
+                    $("#edit_primer_apellido").val(res.data[0].apellido_paterno);
+                    $("#edit_segundo_apellido").val(res.data[0].apellido_materno);
+                    $("#edit_nombre_login").val(res.data[0].login);
+                    $("#edit_correo").val(res.data[0].email);
+                    $("#edit_password").val(res.data[0].password);
+                    $("#edit_fecha_vigencia").val(res.data[0].fecha_vigencia);
+                    $("#edit_cliente").val(res.data[0].cliente);
+                    $("#edit_area").val(res.data[0].area);
+                     
+                    $("#modal_editar_usuario").modal('show');
+                });
+            } 
+            
+            // EDITAR USUARIO (SUBMIT MODAL)
+            $("#formEditUsuario").submit(function(e){
+                e.preventDefault(); 
+                
+                var form_datos = new FormData(document.getElementById("formEditUsuario"));
+                var fecha = new Date($("#edit_fecha_vigencia").val());
+                var dia = fecha.getDate();
+                var mes = fecha.getMonth()+1;
+                var anio = fecha.getFullYear();
+                form_datos.append("edit_fecha_vigencia", anio+"-"+mes+"-"+dia);
+                
+                abrir_modal("modal_cargando");
+                $.ajax({
+                    url: "usuario/editUsuario",
+                    type: "POST",
+                    dataType: "JSON",
+                    data: form_datos,
+                    cache: false,
+                    contentType: false,
+                    processData: false
+                }).done(function (res) {
+                    
+                    if(res.data == true){
+                        cerrar_modal("modal_cargando");
+                        $("#modal_editar_usuario").modal('hide');
+                        Swal.fire({
+                            icon: 'success',
+                            title: '¡Éxito!',
+                            text: 'El usuario ha sido modificaado satisfactoriamente.'
+                        });
+                        cargar_tabla();
+                    }
+                });
             });
             
             // ELIMINAR USUARIO
@@ -372,16 +681,54 @@
                                 title: '¡Correcto!',
                                 text: 'El usuario ha sido eliminado satisfactoriamente.'
                             });
-                            cargar_tabla()
+                            cargar_tabla();
                         });
+                    }
+                });
+            };
+            
+            // REACTIVAR USUARIO ELIMINADO SETEANDO SU FECHA_VIGENCIA EN NULL Y ESTATUS = A
+            function reactivar_usuario(id){
+                
+                Swal.fire({
+                    icon: 'warning',
+                    title: '¡Atención!',
+                    text: 'Está a punto de activar un usuario eliminado anteriormente. ¿Desea continuar?',
+                    showDenyButton: true,
+                    confirmButtonText: 'Continuar',
+                    denyButtonText: 'Cancelar'
+                }).then((result) => {
+                    if (result.isConfirmed){
                         
+                        var form_datos = new FormData();
+                        form_datos.append("id_usuario", id);
+
+                        abrir_modal("modal_cargando");
+                        $.ajax({
+                            url: "usuario/reactivarUsuario",
+                            type: "POST",
+                            dataType: "JSON",
+                            data: form_datos,
+                            cache: false,
+                            contentType: false,
+                            processData: false
+                        }).done(function (res) {
+                            
+                            cerrar_modal("modal_cargando");
+                            Swal.fire({
+                                icon: 'success',
+                                title: '¡Correcto!',
+                                text: 'El usuario ha sido reactivado satisfactoriamente.'
+                            });
+                            cargar_tabla();
+                        });
                     }
                 });
             };
             
         </script>
         
-        <!<!-- MODAL -->
+        <!-- MODAL -->
         <script>
             function abrir_modal(div) {
                 $('#' + div).css("display", "block");
